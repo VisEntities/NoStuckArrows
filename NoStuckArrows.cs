@@ -7,7 +7,7 @@
 namespace Oxide.Plugins
 {
     [Info("No Stuck Arrows", "VisEntities", "1.0.0")]
-    [Description(" ")]
+    [Description("Fixes arrows and spears remaining stuck on players even after they respawn.")]
     public class NoStuckArrows : RustPlugin
     {
         #region Fields
