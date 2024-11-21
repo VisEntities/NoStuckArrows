@@ -6,7 +6,7 @@
 
 namespace Oxide.Plugins
 {
-    [Info("No Stuck Arrows", "VisEntities", "1.0.0")]
+    [Info("No Stuck Arrows", "VisEntities", "1.0.1")]
     [Description("Fixes arrows and spears remaining stuck on players even after they respawn.")]
     public class NoStuckArrows : RustPlugin
     {
@@ -28,11 +28,11 @@ namespace Oxide.Plugins
             _plugin = null;
         }
 
-        private void OnPlayerRespawned(BasePlayer player)
+        private void OnPlayerDeath(BasePlayer player, HitInfo hitInfo)
         {
-            if (player == null)
+            if (player == null || hitInfo == null)
                 return;
-
+ 
             RemoveStuckProjectiles(player);
         }
 
@@ -53,6 +53,7 @@ namespace Oxide.Plugins
                 Item item = worldItem.item;
                 if (item != null && item.info.category == ItemCategory.Ammunition)
                 {
+                    worldItem.DestroyItem();
                     worldItem.Kill();
                 }
             }
